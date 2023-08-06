@@ -1,6 +1,7 @@
 import "./globals.css";
 import Header from "@/components/header";
 import { ThemeProvider } from "@/components/theme-provider";
+// import { LocationProvider } from "@/context/weatherContext";
 import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 

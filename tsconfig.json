@@ -30,7 +30,8 @@
     ".next/types/**/*.ts",
     "app/layout.jsx",
     "app/layout.jsx",
-    "components/header.tsx"
+    "components/header.tsx",
+    "context/weatherContext.jsx"
   ],
   "exclude": ["node_modules"]
 }

@@ -1,4 +1,4 @@
-import React, { MouseEvent, useState } from "react";
+import React, { MouseEvent, useState, useEffect } from "react";
 import { AiOutlineEye } from "react-icons/ai";
 import { BsArrowRightShort } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
@@ -9,22 +9,66 @@ import toast, { Toaster } from "react-hot-toast";
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import Weatherstatus from "./weathetstatus";
 import fetchWeather from "../app/api/weather/weatherApi";
+import GeoLocationPage from "./geolocation";
 export default function Card() {
   const [weatherstat, setWeather] = useState("");
   const [city, setCity] = useState("");
   const [loading, setLoading] = useState(false);
   let mouseX = useMotionValue(0);
   let mouseY = useMotionValue(0);
-
+  const [location, setLocation] = useState<{
+    latitude: number | null;
+    longitude: number | null;
+  }>({
+    latitude: null,
+    longitude: null,
+  });
   var today = new Date();
   var date =
     today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+
+  useEffect(() => {
+    handleLocationPermission();
+    // Konum bilgisi alındığında otomatik olarak hava durumu bilgilerini getir
+    if (location.latitude !== null && location.longitude !== null) {
+      fetchWeather(city, location.latitude, location.longitude)
+        .then((data) => {
+          setWeather(data);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    } else {
+      setLoading(false);
+      // Hata durumunu ele almak için gerekli işlemleri yapabilirsiniz.
+      // Örneğin kullanıcıya bir mesaj gösterebilirsiniz.
+      console.error("Konum bilgisi alınamadı!");
+    }
+  }, [location.latitude, location.longitude]);
+  const handleLocationPermission = () => {
+    // Konum bilgisine izin verilmediyse izin iste
+    if (!navigator.geolocation) {
+      toast.error("Tarayıcı konum özelliğini desteklemiyor.");
+    } else {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setLocation({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          });
+        },
+        (error) => {
+          toast.error("Konum izni reddedildi.");
+        }
+      );
+    }
+  };
   // const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.NEXT_PUBLIC_WEATHER_KEYS}`;
   const handleSubmit = (e: any) => {
     e.preventDefault();
     setLoading(true);
 
-    fetchWeather(city)
+    fetchWeather(city, location.latitude, location.longitude)
       .then((data) => {
         setWeather(data);
       })
@@ -57,7 +101,7 @@ export default function Card() {
         <motion.div
           className="rounded-xl pointer-events-none absolute -inset-px  opacity-80 transition duration-1000 group-hover:opacity-50"
           style={{
-            background: useMotionTemplate`radial-gradient(300px circle at ${mouseX}px ${mouseY}px,rgb(244 244 245 / 0.10),transparent 80% )`,
+            background: useMotionTemplate`radial-gradient(300px circle at ${mouseX}px ${mouseY}px,dark:rgb(244 244 245 / 0.10),transparent 80%  )`,
           }}
         />
         <article className=" relative w-full h-full p-4 md:p-8  ">
@@ -118,6 +162,7 @@ export default function Card() {
           </div> */}
         </article>
       </div>
+      {/* <GeoLocationPage /> */}
       {weatherstat && <Weatherstatus data={weatherstat} />}
     </motion.div>
   );
