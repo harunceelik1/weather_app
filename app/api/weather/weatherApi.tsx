@@ -1,7 +1,7 @@
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
-const fetchWeather = (city) => {
+const fetchWeather = async (city: string) => {
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.NEXT_PUBLIC_WEATHER_KEYS}`;
 
   return axios

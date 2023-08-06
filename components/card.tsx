@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import toast, { Toaster } from "react-hot-toast";
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import Weatherstatus from "./weathetstatus";
-import fetchWeather from "../app/api/weather/route";
+import fetchWeather from "../app/api/weather/weatherApi";
 export default function Card() {
   const [weatherstat, setWeather] = useState("");
   const [city, setCity] = useState("");
