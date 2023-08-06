@@ -29,7 +29,6 @@ export default function Card() {
 
   useEffect(() => {
     handleLocationPermission();
-    // Konum bilgisi alındığında otomatik olarak hava durumu bilgilerini getir
     if (location.latitude !== null && location.longitude !== null) {
       fetchWeather(city, location.latitude, location.longitude)
         .then((data) => {
@@ -40,8 +39,7 @@ export default function Card() {
         });
     } else {
       setLoading(false);
-      // Hata durumunu ele almak için gerekli işlemleri yapabilirsiniz.
-      // Örneğin kullanıcıya bir mesaj gösterebilirsiniz.
+
       console.error("Konum bilgisi alınamadı!");
     }
   }, [location.latitude, location.longitude]);
