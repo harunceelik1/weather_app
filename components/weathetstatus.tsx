@@ -72,10 +72,10 @@ export default function Weatherstatus({ data }: any) {
           <Image
             src={getImagePath(weather[0].description)}
             alt="img"
-            className="object-cover  absolute inset-0 w-full h-full opacity-75 rounded-xl  "
+            className="object-cover  absolute  w-full h-full opacity-75   "
           />
 
-          <div className=" flex justify-center items-center h-full lg:flex-col p-4 backdrop-blur-sm">
+          <div className=" flex justify-center items-center h-full w-full  lg:flex-col p-4 backdrop-blur-sm ">
             <motion.div
               className="rounded-xl pointer-events-none absolute -inset-px  opacity-80 transition duration-1000 group-hover:opacity-50"
               style={{

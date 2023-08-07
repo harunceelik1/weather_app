@@ -17,6 +17,7 @@ export default function Card() {
   const [weatherstat, setWeather] = useState("");
   const [city, setCity] = useState("");
   const [loading, setLoading] = useState(false);
+
   let mouseX = useMotionValue(0);
   let mouseY = useMotionValue(0);
   const [location, setLocation] = useState<{
@@ -69,7 +70,7 @@ export default function Card() {
     e.preventDefault();
     setLoading(true);
 
-    fetchWeather(city, location.latitude, location.longitude)
+    fetchWeather(city.trim(), location.latitude, location.longitude)
       .then((data) => {
         setWeather(data);
       })
