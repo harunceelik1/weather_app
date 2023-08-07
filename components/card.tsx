@@ -10,6 +10,7 @@ import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import Weatherstatus from "./weathetstatus";
 import fetchWeather from "../app/api/weather/weatherApi";
 import { WeatherContext } from "@/context/weatherContext";
+import Image from "next/image";
 export default function Card() {
   const { setWeatherData } = useContext(WeatherContext);
 
@@ -159,6 +160,7 @@ export default function Card() {
           </div> */}
         </article>
       </div>
+
       {weatherstat && <Weatherstatus data={weatherstat} />}
     </motion.div>
   );

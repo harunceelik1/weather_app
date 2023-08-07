@@ -4,9 +4,17 @@ import React, { MouseEvent, useState } from "react";
 import Image from "next/image";
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import Link from "next/link";
+import thunder from "@/public/assets/thunder.gif";
+import snow from "@/public/assets/snow.gif";
+import rain from "@/public/assets/rainn.gif";
+import sun from "@/public/assets/sun2.gif";
+import cloudsun from "@/public/assets/cloud_sun.gif";
+import clouds from "@/public/assets/clearsky.webp";
+import mist from "@/public/assets/mist.gif";
 
 export default function Weatherstatus({ data }: any) {
   const { name, main, weather, sys } = data;
+  console.log(weather[0].description);
   let mouseX = useMotionValue(0);
   let mouseY = useMotionValue(0);
   let mouseX1 = useMotionValue(0);
@@ -29,28 +37,53 @@ export default function Weatherstatus({ data }: any) {
     mouseX1.set(clientX - left);
     mouseY1.set(clientY - top);
   }
+  const getImagePath = (main: any): any => {
+    if (main.includes("clouds")) {
+      return cloudsun;
+    } else if (main.includes("snow")) {
+      return snow;
+    } else if (main.includes("rain")) {
+      return rain;
+    } else if (main.includes("thunderstorm")) {
+      return thunder;
+    } else if (main.includes("clear")) {
+      return sun;
+    } else if (main.includes("drizzle")) {
+      return rain;
+    } else if (main === "mist" || main === "smoke" || main === " haze") {
+      return mist;
+    }
+    return "";
+  };
 
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="flex flex-col w-full gap-8 mx-auto  "
+      className="flex flex-col w-full  gap-8 mx-auto   "
     >
       <Link href={""}>
         <div
           onMouseMove={handleMouseMove}
           className=" 
 
-      overflow-hidden relative rounded-xl border border-zinc-600  hover:bg-zinc-800/10 w-full h-full  dark:bg-transparent duration-700 "
+      overflow-hidden relative rounded-xl border border-zinc-600  hover:bg-zinc-800/10 w-full justify-center h-full  dark:bg-transparent duration-700 top-0 left-0 bg-black/40"
         >
-          <div className=" flex justify-center items-center h-full lg:flex-col p-4">
+          <Image
+            src={getImagePath(weather[0].description)}
+            alt="img"
+            className="object-cover absolute inset-0 w-full h-full opacity-75 "
+          />
+
+          <div className=" flex justify-center items-center h-full lg:flex-col p-4 backdrop-blur-sm">
             <motion.div
               className="rounded-xl pointer-events-none absolute -inset-px  opacity-80 transition duration-1000 group-hover:opacity-50"
               style={{
                 background: useMotionTemplate`radial-gradient(150px circle at ${mouseX}px ${mouseY}px,rgb(244 244 245 / 0.10),transparent 80% )`,
               }}
             />
-            <h2 className="text-3xl font-bold dark:text-zinc-100 text-zinc-500 ">
+
+            <h2 className="text-3xl font-bold dark:text-zinc-100  text-black/80 ">
               {name}
             </h2>
 

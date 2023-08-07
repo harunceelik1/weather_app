@@ -38,7 +38,7 @@ export default function Header() {
   }
   useEffect(() => {
     if (weatherData) {
-      // WeatherData varsa konum verilerini al
+      // WeatherData verisi geliyor ise verileri yolluyoruz.
       const name = weatherData.name;
       const sys = weatherData.sys.country;
       const temp = weatherData.main.temp;
