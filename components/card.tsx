@@ -9,7 +9,6 @@ import toast, { Toaster } from "react-hot-toast";
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import Weatherstatus from "./weathetstatus";
 import fetchWeather from "../app/api/weather/weatherApi";
-import GeoLocationPage from "./geolocation";
 import { WeatherContext } from "@/context/weatherContext";
 export default function Card() {
   const { setWeatherData } = useContext(WeatherContext);
@@ -48,7 +47,7 @@ export default function Card() {
     }
   }, [location.latitude, location.longitude]);
   const handleLocationPermission = () => {
-    // Konum bilgisine izin verilmediyse izin iste
+    // Konum bilgisi istenilen fonksiyon yukarıda çağırıyoruz.
     if (!navigator.geolocation) {
       toast.error("Tarayıcı konum özelliğini desteklemiyor.");
     } else {
@@ -65,7 +64,6 @@ export default function Card() {
       );
     }
   };
-  // const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.NEXT_PUBLIC_WEATHER_KEYS}`;
   const handleSubmit = (e: any) => {
     e.preventDefault();
     setLoading(true);
@@ -79,12 +77,9 @@ export default function Card() {
         setLoading(false);
       });
   };
-  console.log("render");
+  // console.log("render");
   function handleMouseMove({ clientX, clientY, currentTarget }: MouseEvent) {
     let { left, top } = currentTarget.getBoundingClientRect();
-
-    // console.log({ xPosition, yPosition });
-    // setMousePosition({ x: xPosition, y: yPosition });
 
     mouseX.set(clientX - left);
     mouseY.set(clientY - top);
@@ -98,12 +93,12 @@ export default function Card() {
       <Toaster position="top-center" />
       <div
         onMouseMove={handleMouseMove}
-        className="   relative border rounded-xl hover:bg-zinc-800/10 group md:gap-8 hover:border-zinc-400/50 border-transparent border-zinc-600 transition duration-1000"
+        className=" overflow-hidden  relative border rounded-xl hover:bg-zinc-800/10 group md:gap-8 hover:border-zinc-400/50 border-transparent border-zinc-600 transition duration-1000"
       >
         <motion.div
           className="rounded-xl pointer-events-none absolute -inset-px  opacity-80 transition duration-1000 group-hover:opacity-50"
           style={{
-            background: useMotionTemplate`radial-gradient(300px circle at ${mouseX}px ${mouseY}px,dark:rgb(244 244 245 / 0.10),transparent 80%  )`,
+            background: useMotionTemplate`radial-gradient(300px circle at ${mouseX}px ${mouseY}px,rgb(244 244 245 / 0.10),transparent 80%  )`,
           }}
         />
         <article className=" relative w-full h-full p-4 md:p-8  ">
@@ -164,7 +159,6 @@ export default function Card() {
           </div> */}
         </article>
       </div>
-      {/* <GeoLocationPage /> */}
       {weatherstat && <Weatherstatus data={weatherstat} />}
     </motion.div>
   );

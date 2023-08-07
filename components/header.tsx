@@ -18,7 +18,6 @@ import {
 import { WeatherContext } from "@/context/weatherContext";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaTemperatureLow } from "react-icons/fa";
-// import { LocationContext } from "@/context/weatherContext";
 const font = Poppins({
   weight: "800",
   subsets: ["latin"],
@@ -46,16 +45,6 @@ export default function Header() {
       setLocationData({ name, sys, temp });
     }
   }, [weatherData]);
-  // const { weather } = useContext(LocationContext);
-  // console.log("Saa" + weather);
-
-  // const { name, main, weather, sys } = weatherData;
-
-  // const name = weatherData?.name;
-  // const sys = weatherData?.sys.country;
-  // const temp = weatherData?.main.temp;
-
-  // console.log("sa" + name);
 
   return (
     <div className=" fixed inset-x-0 top-0 z-50 backdrop-blur  duration-200 border-b  bg-zinc-900/0 border-transparent w-full justify-between flex p-4 items-center ">
