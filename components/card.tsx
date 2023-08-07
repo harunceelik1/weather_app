@@ -1,4 +1,4 @@
-import React, { MouseEvent, useState, useEffect } from "react";
+import React, { MouseEvent, useState, useEffect, useContext } from "react";
 import { AiOutlineEye } from "react-icons/ai";
 import { BsArrowRightShort } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
@@ -10,7 +10,10 @@ import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import Weatherstatus from "./weathetstatus";
 import fetchWeather from "../app/api/weather/weatherApi";
 import GeoLocationPage from "./geolocation";
+import { WeatherContext } from "@/context/weatherContext";
 export default function Card() {
+  const { setWeatherData } = useContext(WeatherContext);
+
   const [weatherstat, setWeather] = useState("");
   const [city, setCity] = useState("");
   const [loading, setLoading] = useState(false);
@@ -33,6 +36,7 @@ export default function Card() {
       fetchWeather(city, location.latitude, location.longitude)
         .then((data) => {
           setWeather(data);
+          setWeatherData(data);
         })
         .finally(() => {
           setLoading(false);
@@ -141,7 +145,7 @@ export default function Card() {
               >
                 <Button type="submit" onClick={handleSubmit}>
                   <FiSearch className="" />
-                </Button>
+                </Button>{" "}
               </motion.div>
             </div>
           </form>

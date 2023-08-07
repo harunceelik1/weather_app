@@ -1,6 +1,7 @@
 import "./globals.css";
 import Header from "@/components/header";
 import { ThemeProvider } from "@/components/theme-provider";
+import { WeatherContextProvider } from "@/context/weatherContext";
 // import { LocationProvider } from "@/context/weatherContext";
 import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
@@ -14,12 +15,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="h-full " suppressHydrationWarning>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Header />
-          <main className="md:pl-20 pt-16 h-full px-8 mx-auto max-w-7xl">
-            {children}
-          </main>
-        </ThemeProvider>
+        <WeatherContextProvider>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <Header />
+            <main className="md:pl-20 pt-16 h-full px-8 mx-auto max-w-7xl">
+              {children}
+            </main>
+          </ThemeProvider>
+        </WeatherContextProvider>
       </body>
     </html>
   );

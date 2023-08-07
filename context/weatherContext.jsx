@@ -1,14 +1,14 @@
 "use client";
-import React, { useState, createContext } from "react";
+import { createContext, useContext, useState } from "react";
 
-export const LocationContext = createContext();
+export const WeatherContext = createContext();
 
-export default function LocationProvider({ children }) {
-  //sidebar state
-  const { weather } = weatherStat;
+export function WeatherContextProvider({ children }) {
+  const [weatherData, setWeatherData] = useState(null);
+
   return (
-    <LocationContext.Provider value={{ weather }}>
+    <WeatherContext.Provider value={{ weatherData, setWeatherData }}>
       {children}
-    </LocationContext.Provider>
+    </WeatherContext.Provider>
   );
 }
