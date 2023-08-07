@@ -13,8 +13,8 @@ import clouds from "@/public/assets/clearsky.webp";
 import mist from "@/public/assets/mist.gif";
 
 export default function Weatherstatus({ data }: any) {
-  const { name, main, weather, sys } = data;
-  console.log(weather[0].description);
+  const { name, main, weather, sys, wind } = data;
+  console.log(wind.speed);
   let mouseX = useMotionValue(0);
   let mouseY = useMotionValue(0);
   let mouseX1 = useMotionValue(0);
@@ -67,12 +67,12 @@ export default function Weatherstatus({ data }: any) {
           onMouseMove={handleMouseMove}
           className=" 
 
-      overflow-hidden relative rounded-xl border border-zinc-600  hover:bg-zinc-800/10 w-full justify-center h-full  dark:bg-transparent duration-700 top-0 left-0 bg-black/40"
+      overflow-hidden  relative rounded-xl border border-zinc-600  hover:bg-zinc-800/10 w-full justify-center  h-[250px]  lg:h-full  dark:bg-transparent duration-700 top-0 left-0 bg-black/40"
         >
           <Image
             src={getImagePath(weather[0].description)}
             alt="img"
-            className="object-cover absolute inset-0 w-full h-full opacity-75 "
+            className="object-cover  absolute inset-0 w-full h-full opacity-75 rounded-xl  "
           />
 
           <div className=" flex justify-center items-center h-full lg:flex-col p-4 backdrop-blur-sm">
@@ -112,12 +112,9 @@ export default function Weatherstatus({ data }: any) {
         <div className="flex  justify-around items-center h-full p-4 max-sm:p-16 max-sm:flex-col max-sm:text-center">
           <div>
             <h1 className="font-bold text-xl text-zinc-500 dark:text-zinc-100">
-              Current Weather
+              Speed
             </h1>
-            <p className="opacity-50 text-center">
-              {" "}
-              {weather && weather[0].description}
-            </p>
+            <p className="opacity-50 text-center"> {wind && wind.speed}</p>
           </div>
           <div>
             <h1 className="font-bold text-xl text-zinc-500 dark:text-zinc-100">

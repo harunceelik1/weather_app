@@ -89,12 +89,12 @@ export default function Card() {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="p-8 grid grid-cols-1 lg:grid-cols-2 gap-8"
+      className="p-4 px-2 grid grid-cols-1 lg:grid-cols-2 gap-8 mt-10"
     >
       <Toaster position="top-center" />
       <div
         onMouseMove={handleMouseMove}
-        className=" overflow-hidden  relative border rounded-xl hover:bg-zinc-800/10 group md:gap-8 hover:border-zinc-400/50 border-transparent border-zinc-600 transition duration-1000"
+        className=" overflow-hidden  relative border rounded-xl    hover:bg-zinc-800/10 group md:gap-8 hover:border-zinc-400 border-transparent border-zinc-600 transition-all duration-1000"
       >
         <motion.div
           className="rounded-xl pointer-events-none absolute -inset-px  opacity-80 transition duration-1000 group-hover:opacity-50"
@@ -119,7 +119,7 @@ export default function Card() {
           </h2>
           <p
             className={cn(
-              " mt-4 leading-8 text-zinc-600 dark:text-zinc-400 group-hover:text-white transition duration-00"
+              " mt-4 leading-8 text-zinc-600 dark:text-zinc-400 transition duration-00"
             )}
           >
             City
