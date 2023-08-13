@@ -14,7 +14,7 @@ import mist from "@/public/assets/mist.gif";
 
 export default function Weatherstatus({ data }: any) {
   const { name, main, weather, sys, wind } = data;
-  console.log(wind.speed);
+  console.log(data);
   let mouseX = useMotionValue(0);
   let mouseY = useMotionValue(0);
   let mouseX1 = useMotionValue(0);
@@ -109,16 +109,22 @@ export default function Weatherstatus({ data }: any) {
             background: useMotionTemplate`radial-gradient(150px circle at ${mouseX1}px ${mouseY1}px,rgb(244 244 245 / 0.10),transparent 80% )`,
           }}
         />
-        <div className="flex  justify-around items-center h-full p-4 max-sm:p-16 max-sm:flex-col max-sm:text-center">
-          <div>
-            <h1 className="font-bold text-xl text-zinc-500 dark:text-zinc-100">
+        <div className="flex  justify-around  items-center h-full p-4 max-sm:p-16 max-sm:flex-col max-sm:text-center">
+          <div className="hidden  min-[1100px]:block">
+            <h1 className="font-bold text-xl  text-zinc-500 dark:text-zinc-100">
               Speed
             </h1>
             <p className="opacity-50 text-center"> {wind && wind.speed}</p>
           </div>
           <div>
             <h1 className="font-bold text-xl text-zinc-500 dark:text-zinc-100">
-              Felt Air Temperature
+              Humidity
+            </h1>
+            <p className="opacity-50 text-center"> {main && main.humidity} %</p>
+          </div>
+          <div>
+            <h1 className="font-bold text-xl text-zinc-500 dark:text-zinc-100">
+              Felt Air Temp
             </h1>
             <p className="opacity-50 text-center">
               {" "}

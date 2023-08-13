@@ -1,0 +1,12 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:Spatie calendar-links
+BEGIN:VEVENT
+UID:56381ace40a1fbed8e102efe8dfdfdb8
+SUMMARY:Coderspace <> Trendyol Backend Developer Bootcamp
+DTSTAMP:20230909T070000Z
+DTSTART:20230909T070000Z
+DTEND:20231001T130000Z
+DESCRIPTION:https://coderspace.io/etkinlikler/trendyol-backend-developer-bootcamp-2023/
+END:VEVENT
+END:VCALENDAR

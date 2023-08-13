@@ -1,0 +1,4 @@
+Parse error on line 1:
+   news: [{"date":"2023
+---^
+Expecting 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '[', got 'undefined'
